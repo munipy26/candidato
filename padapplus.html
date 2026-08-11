@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>PADRONAPP - Padrón General 2026</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-red: #d10000;
+            --primary-orange: #ff8c33;
+            --bg-gray: #f4f7f6;
+            --text-dark: #1a1a1a;
+            --text-muted: #6b7280;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 20px 15px; 
+            background-color: var(--bg-gray); 
+            color: var(--text-dark);
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .container { width: 100%; max-width: 500px; text-align: center; }
+        
+        .logo { width: 270px; margin-bottom: 24px; border-radius: 0 !important; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); }
+        
+        .red-banner { 
+            color: var(--primary-red); 
+            font-size: 16px; 
+            font-weight: 700; 
+            margin-top: -8px;
+            margin-bottom: 16px; 
+            text-align: center;
+        }
+        
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        label { font-weight: 600; font-size: 14px; margin-bottom: 8px; display: block; color: var(--text-muted); }
+        input#cedula { 
+            width: 100%; 
+            padding: 16px; 
+            border: 2px solid #e5e7eb; 
+            background-color: #f9fafb; 
+            border-radius: 12px; 
+            font-size: 18px; 
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        input#cedula:focus { 
+            border-color: var(--primary-orange); 
+            box-shadow: 0 0 0 4px rgba(255, 140, 51, 0.1);
+            background-color: white;
+        }
+        
+        .btn-row { display: flex; gap: 12px; margin-top: 8px; }
+        .btn { 
+            padding: 16px; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            flex: 1; 
+            border: none;
+            transition: transform 0.1s, opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-orange { background-color: var(--primary-orange); color: white; }
+        .btn-outline { background-color: transparent; border: 2px solid #e5e7eb; color: var(--text-muted); }
+        
+        #result-container { display: none; }
+        
+        .result-full { border-bottom: 1px solid #f3f4f6; padding: 16px 0; }
+        .result-full:last-child { border-bottom: none; }
+        .result-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .result-value { font-size: 16px; font-weight: 600; color: var(--text-dark); }
+        
+        .grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+        .grid-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 16px; }
+        
+        .grid-col { padding: 12px; background-color: #f9fafb; border-radius: 10px; text-align: center; }
+        .grid-label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .grid-value { font-size: 14px; font-weight: 700; color: var(--primary-red); margin-top: 4px; }
+
+        
+
+        .footer-text { margin-top: 40px; font-size: 12px; color: var(--text-muted); line-height: 1.5; padding-bottom: 20px; }
+        
+        
+        .voter-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            font-size: 13px;
+        }
+        .voter-table th, .voter-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .voter-table th {
+            background-color: #f9fafb;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+        
+        .btn-delete {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            margin-top: 20px;
+            width: 100%;
+        }
+        #loading-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(255,255,255,0.9); display: flex; align-items: center; 
+            justify-content: center; z-index: 1000; font-weight: 700; color: var(--primary-red);
+        }
+    </style>
+
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PadronApp">
+    <link rel="apple-touch-icon" href="padronapp.png">
+</head>
+
+
+<body>
+    <div id="loading-overlay">Cargando base de datos...</div>
+
+    <div class="container">
+        <img src="padronapp1.png" alt="logo" class="logo">
+        <div class="red-banner">Padrón General 2026 - Fernando de la Mora</div>
+        
+        <div id="search-card" class="card">
+            <div class="form-group">
+                <label for="cedula">Cédula de Identidad</label>
+                <input type="number" id="cedula" placeholder="Ingrese su número de CI" inputmode="numeric">
+            </div>
+            <div id="search-btns" class="btn-row">
+                <button class="btn btn-orange" id="aceptar">Consultar</button>
+                <button class="btn btn-outline" id="limpiar">Limpiar</button>
+            </div>
+        </div>
+
+        <div id="result-container" class="card" style="display: none;">
+            <!-- Custom rendered results -->
+        </div>
+
+        <div id="add-container" style="margin: 20px 0;">
+            <button class="btn btn-orange" id="agregar" style="width: 100%;">AGREGAR</button>
+        </div>
+
+
+        <div id="voters-list-container" style="margin-top: 20px; display: none;">
+            <table class="voter-table" id="voter-table">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre y Apellido</th>
+                        <th>Dirección</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button class="btn btn-whatsapp" id="enviar-wa">ENVIAR POR WHATSAPP</button>
+        </div>
+        <div class="footer-text">
+            Padrón General Actualizado para las Municipales del 04-Octubre-2026.
+        </div>
+    </div>
+
+    <script>
+        window.csvData = [];
+        let currentRecord = null;
+        let isLoaded = false;
+
+        const loader = document.getElementById('loading-overlay');
+        const searchCard = document.getElementById('search-card');
+        const searchBtns = document.getElementById('search-btns');
+        const cedulaInput = document.getElementById('cedula');
+        const containerDiv = document.querySelector('.container');
+        const redBanner = document.querySelector('.red-banner');
+        const resultContainer = document.getElementById('result-container');
+
+        loader.style.display = 'flex';
+        
+        Papa.parse('padronapp.csv', {
+            download: true,
+            header: true,
+            delimiter: ";",
+            encoding: "ISO-8859-1",
+            skipEmptyLines: true,
+            complete: function(results) {
+                window.csvData = results.data;
+                isLoaded = true;
+                loader.style.display = 'none';
+                console.log('CSV Loaded');
+            },
+            error: function(err) {
+                loader.textContent = 'Error al cargar datos.';
+            }
+        });
+
+        function toggleSearchState(isMinimized) {
+            // Modified to keep search card at top
+            if (isMinimized) {
+                searchBtns.style.display = 'none';
+                searchCard.style.padding = '16px';
+                searchCard.style.marginBottom = '12px';
+            } else {
+                searchBtns.style.display = 'flex';
+                searchCard.style.padding = '24px';
+                searchCard.style.marginBottom = '24px';
+            }
+        }
+
+        cedulaInput.addEventListener('focus', () => {
+            if (currentRecord && searchBtns.style.display === 'none') {
+                searchBtns.style.display = 'flex';
+            }
+        });
+
+        function renderResult(record) {
+            resultContainer.innerHTML = '';
+            if (!record) {
+                resultContainer.style.display = 'none';
+                return;
+            }
+            resultContainer.style.display = 'block';
+            
+            resultContainer.innerHTML = `
+
+                <div class="result-full">
+                    <div class="result-label">Nombre Completo</div>
+                    <div class="result-value">${record.cedula} - ${record.nombre} ${record.apellido}</div>
+                </div>
+                <div class="result-full">
+                    <div class="result-label">Local de Votación</div>
+                    <div class="result-value">${record.local_votacion}</div>
+                </div>
+                <div class="grid-row">
+                    <div class="result-item">
+                        <div class="result-label">Mesa</div>
+                        <div class="result-value">${record.mesa}</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Orden</div>
+                        <div class="result-value">${record.orden}</div>
+                    </div>
+                </div>
+                <div class="result-full">
+                    <div class="result-label">Dirección</div>
+                    <div class="result-value">${record.direccion}</div>
+                </div>
+                <div class="grid-row-3">
+                    <div class="grid-col">
+                        <div class="grid-label">Nacimiento</div>
+                        <div class="grid-value">${record.fecha_nacimiento}</div>
+                    </div>
+                    <div class="grid-col">
+                        <div class="grid-label">Afiliación</div>
+                        <div class="grid-value">${record.fecha_afiliacion}</div>
+                    </div>
+                    <div class="grid-col">
+                        <div class="grid-label">Edad</div>
+                        <div class="grid-value">${record.edad}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('aceptar').addEventListener('click', () => {
+            if (!isLoaded) {
+                alert('La base de datos aún se está cargando.');
+                return;
+            }
+            const val = cedulaInput.value.trim();
+            if (!val) {
+                alert('Por favor, ingrese un número de cédula.');
+                return;
+            }
+            currentRecord = window.csvData.find(r => r.cedula === val);
+            if (currentRecord) {
+                renderResult(currentRecord);
+                toggleSearchState(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert('El número de cédula no se encuentra en el padrón.');
+                renderResult(null);
+                toggleSearchState(false);
+            }
+        });
+
+        
+        window.removeVoter = (cedula) => {
+            addedVoters = addedVoters.filter(v => v.cedula !== cedula);
+            const row = document.querySelector(`tr[data-cedula="${cedula}"]`);
+            if (row) row.remove();
+            
+            if (addedVoters.length === 0) {
+                votersListContainer.style.display = 'none';
+            }
+        };
+
+        
+        document.getElementById('limpiar').addEventListener('click', () => {
+            if (addedVoters.length > 0) {
+                if (!confirm('¿Está seguro de que desea limpiar el formulario y TODOS los registros de la tabla?')) {
+                    return;
+                }
+            }
+            
+            cedulaInput.value = '';
+            currentRecord = null;
+            renderResult(null);
+            toggleSearchState(false);
+            
+            // Clear table
+            addedVoters = [];
+            voterTableBody.innerHTML = '';
+            votersListContainer.style.display = 'none';
+        });
+
+
+        
+        let addedVoters = [];
+        const votersListContainer = document.getElementById('voters-list-container');
+        const voterTableBody = document.querySelector('#voter-table tbody');
+        const agregarBtn = document.getElementById('agregar');
+        const enviarWaBtn = document.getElementById('enviar-wa');
+
+        agregarBtn.addEventListener('click', () => {
+            if (!currentRecord) {
+                alert('Primero debe consultar un elector.');
+                return;
+            }
+            
+            // Check if already added
+            if (addedVoters.some(v => v.cedula === currentRecord.cedula)) {
+                alert('Este elector ya ha sido agregado a la lista.');
+                return;
+            }
+
+            const voter = {
+                cedula: currentRecord.cedula,
+                nombre: `${currentRecord.nombre} ${currentRecord.apellido}`,
+                direccion: currentRecord.direccion
+            };
+
+            addedVoters.push(voter);
+            votersListContainer.style.display = 'block';
+
+            
+            const row = document.createElement('tr');
+            row.setAttribute('data-cedula', voter.cedula);
+            row.innerHTML = `
+                <td>${voter.cedula}</td>
+                <td>${voter.nombre}</td>
+                <td>${voter.direccion}</td>
+                <td><button class="btn-delete" onclick="removeVoter('${voter.cedula}')">Eliminar</button></td>
+            `;
+            voterTableBody.appendChild(row);
+
+            alert('Elector agregado a la lista.');
+
+            
+            // Optional: reset search
+            cedulaInput.value = '';
+            currentRecord = null;
+            renderResult(null);
+            toggleSearchState(false);
+        });
+
+        enviarWaBtn.addEventListener('click', () => {
+            if (addedVoters.length === 0) {
+                alert('La lista está vacía.');
+                return;
+            }
+
+            let message = "LISTA DE VOTANTES DE MI EQUIPO\n\n";
+            addedVoters.forEach((v, index) => {
+                message += `${index + 1}. CI: ${v.cedula}\n`;
+                message += `Nombre: ${v.nombre}\n`;
+                message += `Dirección: ${v.direccion}\n\n`;
+            });
+
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/595992776729?text=${encodedMessage}`;
+           // const waUrl = `https://wa.me/595994329417?text=${encodedMessage}`;
+            window.open(waUrl, '_blank');
+        });
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((reg) => console.log('Service Worker registrado', reg))
+                    .catch((err) => console.error('Error al registrar Service Worker', err));
+            });
+        }
+    </script>
+</body>
+</html>

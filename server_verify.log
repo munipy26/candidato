@@ -1,0 +1,69 @@
+127.0.0.1 - - [21/Mar/2026 02:02:57] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 02:02:57] "GET /padronapp1.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 02:02:58] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 02:02:58] "GET /sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 02:02:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 02:02:58] "GET /padronapp.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 02:03:00] "GET /padapplus.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 02:03:00] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:12] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /padronapp1.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /webl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /facl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /tikl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /insl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /whal.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /padronapp.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:13] "GET /index.html HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 07:14:16] "GET /padapplus.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:16] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /webl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /padronapp1.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /facl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /insl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /tikl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /whal.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:41] "GET /padronapp.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:42] "GET /padapplus.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 07:14:42] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /facl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /padronapp1.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /insl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /whal.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:07:40] "GET /padronapp.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:22:46] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET /padronapp1.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET /facl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 12:22:47] code 404, message File not found
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET /insl.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET /whal.png HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET /padronapp.csv HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET /sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET /padronapp.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 12:22:47] "GET / HTTP/1.1" 200 -
